@@ -1,7 +1,7 @@
 [project]
-name = "support-api"
+name = "coffee-shop"
 version = "0.1.0"
-description = "Customer Support Intelligence Platform — backend service."
+description = "A coffee shop loyalty program - backend."
 requires-python = ">=3.11"
 dependencies = []
 
