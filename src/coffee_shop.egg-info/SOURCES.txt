@@ -10,5 +10,7 @@ src/coffee_shop.egg-info/dependency_links.txt
 src/coffee_shop.egg-info/requires.txt
 src/coffee_shop.egg-info/top_level.txt
 src/models/__init__.py
+src/models/customer.py
+src/models/order.py
 src/repository/__init__.py
 src/services/__init__.py
