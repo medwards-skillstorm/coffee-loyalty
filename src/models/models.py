@@ -5,7 +5,12 @@ from typing import Literal
 from pydantic import BaseModel, EmailStr, Field
 from pydantic_extra_types.phone_numbers import PhoneNumber
 
-Tier = Literal["bronze", "silver", "gold"]
+from models.enums import CustomerTier, DrinkSize
+
+class Drink(BaseModel): 
+    id: int #The DB will be in charge of generating and incrementing unique IDs
+    name: str
+    base_price: Decimal
 
 class Customer(BaseModel):
     """A single Customer object"""
@@ -15,13 +20,20 @@ class Customer(BaseModel):
     phone: PhoneNumber | None = None
     signup: datetime
     point_balance: int
-    tier: Tier
+    tier: CustomerTier
     lifetime_spend: int
     last_order_dt: datetime
     
 class Order(BaseModel):
     id: int #The DB will be in charge of generating and incrementing unique IDs
-    purchase: list[str] 
+    order_items: list[OrderItem] = Field(default_factory=list, max_length=50)
     total: Decimal
     created_at: datetime
-    
+    points_awarded: int = Field(gt=0)
+
+class OrderItem(BaseModel):
+    drink: Drink
+    size: DrinkSize
+    quantity: int = Field(gt=0)
+    order_id: int
+    drink_id: int
